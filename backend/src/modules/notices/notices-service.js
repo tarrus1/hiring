@@ -55,13 +55,10 @@ const fetchNoticeDetailById = async (id) => {
   return noticeDetail;
 };
 
-const addNotice = async (payload) => {
-  const affectedRow = await addNewNotice(payload);
-  if (affectedRow <= 0) {
-    throw new ApiError(500, "Unable to add new notice");
-  }
-
-  return { message: "Notice added successfully" };
+const addNotice = async ({ title, description, authorId }) => { //Define addNotice function
+  const newNotice = new Notice({ title, description, authorId });
+  await newNotice.save();
+  return { message: "Notice added successfully" }; //Return success message after saving
 };
 
 const updateNotice = async (payload) => {

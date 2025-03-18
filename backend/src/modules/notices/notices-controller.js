@@ -68,8 +68,8 @@ const handleFetchNoticeDetailById = asyncHandler(async (req, res) => {
 
 const handleAddNotice = asyncHandler(async (req, res) => {
   const { id: authorId } = req.user;
-  const payload = req.body;
-  const message = await addNotice({ ...payload, authorId });
+  const { title, description } = req.body; // Extract title and description from req.body
+  const message = await addNotice({ title, description, authorId }); //Pass title, description and authorId to addNotice function
   res.json(message);
 });
 
